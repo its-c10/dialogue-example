@@ -1,0 +1,11 @@
+name: DialogueExample
+version: '${project.version}'
+main: com.nthbyte.dialogueexample.DialogueExamplePlugin
+api-version: 1.18
+authors: [C10]
+description: A plugin that shows you how you can utilize the Dialogue API
+website: nthbyte.com
+
+commands:
+  dialogue:
+    description: "Base command for this plugin"
