@@ -1,9 +1,6 @@
 package com.nthbyte.dialogueexample;
 
-import com.nthbyte.dialogue.Dialogue;
-import com.nthbyte.dialogue.DialogueAPI;
-import com.nthbyte.dialogue.Prompt;
-import com.nthbyte.dialogue.PromptInputType;
+import com.nthbyte.dialogue.*;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -35,7 +32,7 @@ public class DialogueCommand implements CommandExecutor {
                         .setText("&eWhat is your age?")
                         .setType(PromptInputType.INTEGER)
                         // Code that runs when the plugin receives the input.
-                        .setOnReceiveInputAction( input -> {
+                        .setOnReceiveInputAction( (p, input) -> {
                             sender.sendMessage("You are " + input + " years old!");
                         })
                 )
@@ -46,6 +43,8 @@ public class DialogueCommand implements CommandExecutor {
                     sender.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
                 })
                 .build();
+        }else if(firstArg.equalsIgnoreCase("number")){
+            dialogue = createChooseNumberDialogue(sender);
         }
 
         if(dialogue != null){
@@ -55,13 +54,27 @@ public class DialogueCommand implements CommandExecutor {
         return false;
     }
 
+    private Dialogue createChooseNumberDialogue(CommandSender sender){
+        return new Dialogue.Builder()
+            .addPrompt(
+                new Prompt.Builder()
+                    .setId("choose_a_number")
+                    .setType(PromptInputType.INTEGER)
+                    .setText("&eChoose a number between 1 and 10")
+                    .setOnReceiveInputAction( (responder, input) -> {
+                        sender.sendMessage(Utils.tr("&aYour number was " + input));
+                    })
+            )
+        .build();
+    }
+
     private Dialogue createTriviaDialogue(CommandSender sender){
         return new Dialogue.Builder()
             .addPrompt(
                 new Prompt.Builder()
                     .setType(PromptInputType.LETTERS)
                     .setText("&eWhat is the nearest planet to the sun?")
-                    .setOnReceiveInputAction( input -> {
+                    .setOnReceiveInputAction( (player, input) -> {
                         if(input.equalsIgnoreCase("Mercury")){
                             sender.sendMessage(ChatColor.GREEN + "Your answer is correct!");
                         }else{
@@ -82,7 +95,7 @@ public class DialogueCommand implements CommandExecutor {
                 new Prompt.Builder()
                     .setType(PromptInputType.INTEGER)
                     .setText("&eHow many inches are in a foot?")
-                    .setOnReceiveInputAction(input -> {
+                    .setOnReceiveInputAction( (responder, input) -> {
                         int number = Integer.parseInt(input);
                         if(number == 12){
                             sender.sendMessage(ChatColor.GREEN + "Your answer is correct!");
