@@ -88,7 +88,7 @@
         <dependency>
             <groupId>com.nthbyte</groupId>
             <artifactId>dialogue</artifactId>
-            <version>1.0.1.0</version>
+            <version>1.1.1.0</version>
         </dependency>
     </dependencies>
 </project>
