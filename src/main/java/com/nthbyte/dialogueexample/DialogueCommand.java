@@ -32,8 +32,8 @@ public class DialogueCommand implements CommandExecutor {
                         .setText("&eWhat is your age?")
                         .setType(PromptInputType.INTEGER)
                         // Code that runs when the plugin receives the input.
-                        .setOnReceiveInputAction( (p, input) -> {
-                            sender.sendMessage("You are " + input + " years old!");
+                        .setOnReceiveInputAction( (responder, input) -> {
+                            responder.sendMessage("You are " + input + " years old!");
                         })
                 )
                 // Sequence to exit the dialogue.
@@ -42,6 +42,8 @@ public class DialogueCommand implements CommandExecutor {
                 .setEndAction(cause -> {
                     sender.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
                 })
+                // Whether the prompt gets repeated when you give invalid input.
+                .setRepeatPrompt(true)
                 .build();
         }else if(firstArg.equalsIgnoreCase("number")){
             dialogue = createChooseNumberDialogue(sender);
@@ -65,6 +67,7 @@ public class DialogueCommand implements CommandExecutor {
                         sender.sendMessage(Utils.tr("&aYour number was " + input));
                     })
             )
+            .setRepeatPrompt(false)
         .build();
     }
 
@@ -74,7 +77,7 @@ public class DialogueCommand implements CommandExecutor {
                 new Prompt.Builder()
                     .setType(PromptInputType.LETTERS)
                     .setText("&eWhat is the nearest planet to the sun?")
-                    .setOnReceiveInputAction( (player, input) -> {
+                    .setOnReceiveInputAction( (responder, input) -> {
                         if(input.equalsIgnoreCase("Mercury")){
                             sender.sendMessage(ChatColor.GREEN + "Your answer is correct!");
                         }else{
