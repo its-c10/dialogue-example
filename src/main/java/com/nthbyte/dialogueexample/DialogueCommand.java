@@ -39,8 +39,8 @@ public class DialogueCommand implements CommandExecutor {
                 // Sequence to exit the dialogue.
                 .setEscapeSequence("exit")
                 // Code that runs when the dialogue ends.
-                .setEndAction(cause -> {
-                    sender.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
+                .setEndAction((p, cause) -> {
+                    p.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
                 })
                 // Whether the prompt gets repeated when you give invalid input.
                 .setRepeatPrompt(true)
@@ -107,8 +107,8 @@ public class DialogueCommand implements CommandExecutor {
                         }
                     })
             )
-            .setEndAction(cause -> {
-                sender.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
+            .setEndAction((player, cause) -> {
+                player.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
             })
             .setEscapeSequence("exit")
             .build();
