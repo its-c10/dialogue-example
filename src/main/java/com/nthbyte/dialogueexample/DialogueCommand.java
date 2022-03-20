@@ -1,6 +1,8 @@
 package com.nthbyte.dialogueexample;
 
 import com.nthbyte.dialogue.*;
+import com.nthbyte.dialogue.action.context.ActionContext;
+import com.nthbyte.dialogue.action.context.LocationContext;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -32,21 +34,20 @@ public class DialogueCommand implements CommandExecutor {
                         .setText("&eWhat is your age?")
                         .setType(PromptInputType.INTEGER)
                         // Code that runs when the plugin receives the input.
-                        .setOnReceiveInputAction( (responder, input) -> {
-                            responder.sendMessage("You are " + input + " years old!");
+                        .addReceiveInputAction( (context, input) -> {
+                            context.getResponder().sendMessage("You are " + input + " years old!");
                         })
                 )
                 // Sequence to exit the dialogue.
                 .setEscapeSequence("exit")
                 // Code that runs when the dialogue ends.
-                .setEndAction((p, cause) -> {
-                    p.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
-                })
                 // Whether the prompt gets repeated when you give invalid input.
                 .setRepeatPrompt(true)
                 .build();
         }else if(firstArg.equalsIgnoreCase("number")){
-            dialogue = createChooseNumberDialogue(sender);
+            dialogue = createChooseNumberDialogue();
+        }else if(firstArg.equalsIgnoreCase("tp")){
+            dialogue = createTeleportDialogue();
         }
 
         if(dialogue != null){
@@ -56,17 +57,54 @@ public class DialogueCommand implements CommandExecutor {
         return false;
     }
 
-    private Dialogue createChooseNumberDialogue(CommandSender sender){
+
+    private Dialogue createTeleportDialogue(){
+
+        /*
+            Utilizes the default actions TELEPORT and STORE_INPUT.
+         */
+        return new Dialogue.Builder()
+            .addPrompt(
+                new Prompt.Builder()
+                    .setType(PromptInputType.DECIMAL)
+                    .setText("&eWhat do you want your X to be?")
+                    .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("x"))
+                    .addReceiveInputAction(Action.MESSAGE, new ActionContext<>("&eYou will teleport to the X coordinate of &f%x%"))
+            )
+            .addPrompt(
+                new Prompt.Builder()
+                    .setType(PromptInputType.DECIMAL)
+                    .setText("&eWhat do you want your Y to be?")
+                    .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("y"))
+                    .addReceiveInputAction(Action.MESSAGE, new ActionContext<>("&eYou will teleport to the Y coordinate of &f%y%"))
+            )
+            .addPrompt(
+                new Prompt.Builder()
+                    .setType(PromptInputType.DECIMAL)
+                    .setText("&eWhat do you want your Z to be?")
+                    .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("z"))
+                    .addReceiveInputAction(Action.MESSAGE, new ActionContext<>("&eYou will teleport to the Z coordinate of &f%z%"))
+            )
+            .addEndAction(Action.TELEPORT, new LocationContext())
+            .addEndAction(Action.MESSAGE, new ActionContext<>("&aYou have been teleported!"))
+            .setEscapeSequence("exit")
+            .build();
+    }
+
+    private Dialogue createChooseNumberDialogue(){
         return new Dialogue.Builder()
             .addPrompt(
                 new Prompt.Builder()
                     .setId("choose_a_number")
                     .setType(PromptInputType.INTEGER)
                     .setText("&eChoose a number between 1 and 10")
-                    .setOnReceiveInputAction( (responder, input) -> {
-                        sender.sendMessage(Utils.tr("&aYour number was " + input));
+                    .addReceiveInputAction( (context, input) -> {
+                        context.getResponder().sendMessage(Utils.tr("&aYour number was " + input));
                     })
             )
+            .addEndAction( (context, cause) -> {
+                context.getResponder().sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
+            })
             .setRepeatPrompt(false)
         .build();
     }
@@ -77,11 +115,11 @@ public class DialogueCommand implements CommandExecutor {
                 new Prompt.Builder()
                     .setType(PromptInputType.LETTERS)
                     .setText("&eWhat is the nearest planet to the sun?")
-                    .setOnReceiveInputAction( (responder, input) -> {
+                    .addReceiveInputAction( (context, input) -> {
                         if(input.equalsIgnoreCase("Mercury")){
-                            sender.sendMessage(ChatColor.GREEN + "Your answer is correct!");
+                            context.getResponder().sendMessage(ChatColor.GREEN + "Your answer is correct!");
                         }else{
-                            sender.sendMessage(ChatColor.RED + "Incorrect!");
+                            context.getResponder().sendMessage(ChatColor.RED + "Incorrect!");
                         }
                     })
                     // This method allows you to introduce your own validation for input.
@@ -98,17 +136,17 @@ public class DialogueCommand implements CommandExecutor {
                 new Prompt.Builder()
                     .setType(PromptInputType.INTEGER)
                     .setText("&eHow many inches are in a foot?")
-                    .setOnReceiveInputAction( (responder, input) -> {
+                    .addReceiveInputAction( (context, input) -> {
                         int number = Integer.parseInt(input);
                         if(number == 12){
-                            sender.sendMessage(ChatColor.GREEN + "Your answer is correct!");
+                            context.getResponder().sendMessage(ChatColor.GREEN + "Your answer is correct!");
                         }else{
-                            sender.sendMessage(ChatColor.RED + "Incorrect!");
+                            context.getResponder().sendMessage(ChatColor.RED + "Incorrect!");
                         }
                     })
             )
-            .setEndAction((player, cause) -> {
-                player.sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
+            .addEndAction( (context, cause) -> {
+                context.getResponder().sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
             })
             .setEscapeSequence("exit")
             .build();
