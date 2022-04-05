@@ -38,8 +38,8 @@ public class DialogueCommand implements CommandExecutor {
                             context.getResponder().sendMessage("You are " + input + " years old!");
                         })
                 )
-                // Sequence to exit the dialogue.
-                .setEscapeSequence("exit")
+                // Sequences to exit the dialogue.
+                .setEscapeSequences("exit", "quit")
                 // Code that runs when the dialogue ends.
                 // Whether the prompt gets repeated when you give invalid input.
                 .setRepeatPrompt(true)
@@ -87,7 +87,7 @@ public class DialogueCommand implements CommandExecutor {
             )
             .addEndAction(Action.TELEPORT, new LocationContext())
             .addEndAction(Action.MESSAGE, new ActionContext<>("&aYou have been teleported!"))
-            .setEscapeSequence("exit")
+            .setEscapeSequences("exit")
             .build();
     }
 
@@ -148,7 +148,7 @@ public class DialogueCommand implements CommandExecutor {
             .addEndAction( (context, cause) -> {
                 context.getResponder().sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
             })
-            .setEscapeSequence("exit")
+            .setEscapeSequences("exit", "quit")
             .build();
     }
 
