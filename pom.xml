@@ -6,7 +6,7 @@
 
     <groupId>com.nthbyte</groupId>
     <artifactId>dialogue-example</artifactId>
-    <version>1.4.0</version>
+    <version>1.6.0</version>
     <packaging>jar</packaging>
 
     <name>Dialogue Example</name>
