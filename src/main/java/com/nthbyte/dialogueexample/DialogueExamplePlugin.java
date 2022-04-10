@@ -1,12 +1,13 @@
 package com.nthbyte.dialogueexample;
 
 import com.nthbyte.dialogue.DialogueAPI;
+import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Example plugin. Shows you how to use Dialogue within you own plugin!
  * @author <a href="linktr.ee/c10_">Caleb Owens</a>
- * @version 1.4.0
+ * @version 1.5.0
  */
 public final class DialogueExamplePlugin extends JavaPlugin {
 

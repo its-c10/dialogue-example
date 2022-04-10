@@ -1,7 +1,7 @@
 package com.nthbyte.dialogueexample;
 
-import com.nthbyte.dialogue.Utils;
 import com.nthbyte.dialogue.event.ValidateInputEvent;
+import com.nthbyte.dialogue.util.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
