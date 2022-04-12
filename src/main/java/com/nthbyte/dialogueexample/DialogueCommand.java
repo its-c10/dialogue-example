@@ -107,6 +107,7 @@ public class DialogueCommand implements CommandExecutor {
                     .addText("&fIt gives background story on characters and setting.")
                     .addText("&fWhat will the exposition of your story be?")
                     .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("exposition"))
+                    .setDelay(20)
             )
             .addPrompt(
                 new Prompt.Builder()
@@ -114,6 +115,7 @@ public class DialogueCommand implements CommandExecutor {
                     .addText("&fIt's the portion of the roller coaster where you're climbing up to the peak.")
                     .addText("&fWhat will the rising action of your story be?")
                     .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("rising_action"))
+                    .setDelay(20)
             )
             .addPrompt(
                 new Prompt.Builder()
@@ -122,6 +124,7 @@ public class DialogueCommand implements CommandExecutor {
                     .addText("&fand you're about to come down.")
                     .addText("&fWhat will the climax of your story be?")
                     .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("climax"))
+                    .setDelay(20)
             )
             .addPrompt(
                 new Prompt.Builder()
@@ -129,6 +132,7 @@ public class DialogueCommand implements CommandExecutor {
                     .addText("&fare being resolved.")
                     .addText("&fWhat will the &bfalling&f action of your story be?")
                     .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("falling_action"))
+                    .setDelay(20)
             )
             .addPrompt(
                 new Prompt.Builder()
@@ -137,6 +141,7 @@ public class DialogueCommand implements CommandExecutor {
                     .addText("&fIt's time to bring your story to a closing")
                     .addText("&fWhat will the resolution of your story be?")
                     .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("resolution"))
+                    .setDelay(20)
             )
             .addEndAction( (context, endCause) -> {
                 if(endCause == DialogueEndCause.NO_MORE_PROMPTS){
