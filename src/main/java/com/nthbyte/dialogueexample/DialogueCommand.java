@@ -181,6 +181,8 @@ public class DialogueCommand implements CommandExecutor {
             .addPrompt(
                 new Prompt.Builder()
                     .setType(PromptInputType.LETTERS)
+                    .setRetryLimit(3)
+                    .stopDialogueUponFailure()
                     .setText("&eWhat is the nearest planet to the sun?")
                     .addReceiveInputAction( (context, input) -> {
                         if(input.equalsIgnoreCase("Mercury")){
@@ -202,13 +204,17 @@ public class DialogueCommand implements CommandExecutor {
             .addPrompt(
                 new Prompt.Builder()
                     .setType(PromptInputType.INTEGER)
+                    .setRetryLimit(3)
+                    .stopDialogueUponFailure()
                     .setText("&eHow many inches are in a foot?")
-                    .addReceiveInputAction( (context, input) -> {
+                    .setOnValidateInputAction( input -> {
                         int number = Integer.parseInt(input);
                         if(number == 12){
-                            context.getResponder().sendMessage(ChatColor.GREEN + "Your answer is correct!");
+                            sender.sendMessage(ChatColor.GREEN + "Your answer is correct!");
+                            return true;
                         }else{
-                            context.getResponder().sendMessage(ChatColor.RED + "Incorrect!");
+                            sender.sendMessage(ChatColor.RED + "Incorrect!");
+                            return false;
                         }
                     })
             )
