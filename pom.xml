@@ -6,7 +6,7 @@
 
     <groupId>com.nthbyte</groupId>
     <artifactId>dialogue-example</artifactId>
-    <version>1.7.0</version>
+    <version>1.8.0</version>
     <packaging>jar</packaging>
 
     <name>Dialogue Example</name>
@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.nthbyte</groupId>
             <artifactId>dialogue</artifactId>
-            <version>1.4.5.0</version>
+            <version>1.4.6.0</version>
         </dependency>
     </dependencies>
 </project>
