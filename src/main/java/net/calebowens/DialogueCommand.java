@@ -5,6 +5,7 @@ import com.nthbyte.dialogue.action.Action;
 import com.nthbyte.dialogue.action.context.ActionContext;
 import com.nthbyte.dialogue.action.context.LocationContext;
 import com.nthbyte.dialogue.input.PromptInputType;
+import com.nthbyte.dialogue.input.context.RegexInputContext;
 import com.nthbyte.dialogue.util.Utils;
 import org.apache.commons.lang.CharUtils;
 import org.apache.commons.lang.StringUtils;
@@ -39,6 +40,8 @@ public class DialogueCommand implements CommandExecutor {
             dialogue = createTeleportDialogue();
         }else if(firstArg.equalsIgnoreCase("story")){
             dialogue = createStoryDialogue();
+        }else if(firstArg.equals("regex")) {
+            dialogue = createRegexDialogue(player);
         }
 
         if(dialogue != null){
@@ -223,6 +226,18 @@ public class DialogueCommand implements CommandExecutor {
                 context.getResponder().sendMessage(ChatColor.BLUE + "This message is sent when the dialogue ends!");
             })
             .setEscapeSequences("exit")
+            .build();
+    }
+
+    private Dialogue createRegexDialogue(Player player) {
+        return new Dialogue.Builder()
+            .addPrompt(
+                new Prompt.Builder()
+                    .setType(new RegexInputContext("[^abc]"))
+                    .addText("Give me some text that contains anything except the letters")
+                    .addText("A, B, and C")
+                    .addReceiveInputAction(Action.MESSAGE, new ActionContext<>("You did it. Good job!"))
+            )
             .build();
     }
 
