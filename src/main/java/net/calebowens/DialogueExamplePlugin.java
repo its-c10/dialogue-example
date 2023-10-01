@@ -1,7 +1,6 @@
-package com.nthbyte.dialogueexample;
+package net.calebowens;
 
 import com.nthbyte.dialogue.DialogueAPI;
-import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**

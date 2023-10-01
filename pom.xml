@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.nthbyte</groupId>
+    <groupId>net.calebowens</groupId>
     <artifactId>dialogue-example</artifactId>
-    <version>1.6.0</version>
+    <version>1.7.0</version>
     <packaging>jar</packaging>
 
     <name>Dialogue Example</name>
@@ -26,7 +26,7 @@
                 <version>2.3.1</version>
                 <configuration>
                     <!-- Change this to decide where the jar gets built -->
-                    <outputDirectory>C:\Users\caleb\OneDrive\Desktop\Minecraft Servers\1.8.8\plugins</outputDirectory>
+                    <outputDirectory>C:\Minecraft Servers\1.8.8\plugins</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -50,6 +50,12 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>com.nthbyte.dialogue</pattern>
+                                    <shadedPattern>com.nthbyte.dialogue.ex</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
@@ -89,7 +95,7 @@
         <dependency>
             <groupId>com.nthbyte</groupId>
             <artifactId>dialogue</artifactId>
-            <version>1.4.3.0</version>
+            <version>1.5.0.0</version>
         </dependency>
     </dependencies>
 </project>

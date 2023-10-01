@@ -1,9 +1,10 @@
-package com.nthbyte.dialogueexample;
+package net.calebowens;
 
 import com.nthbyte.dialogue.*;
 import com.nthbyte.dialogue.action.Action;
 import com.nthbyte.dialogue.action.context.ActionContext;
 import com.nthbyte.dialogue.action.context.LocationContext;
+import com.nthbyte.dialogue.input.PromptInputType;
 import com.nthbyte.dialogue.util.Utils;
 import org.apache.commons.lang.CharUtils;
 import org.apache.commons.lang.StringUtils;

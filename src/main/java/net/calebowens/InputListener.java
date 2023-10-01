@@ -1,4 +1,4 @@
-package com.nthbyte.dialogueexample;
+package net.calebowens;
 
 import com.nthbyte.dialogue.event.ValidateInputEvent;
 import com.nthbyte.dialogue.util.Utils;
