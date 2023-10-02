@@ -7,7 +7,6 @@ import com.nthbyte.dialogue.action.context.LocationContext;
 import com.nthbyte.dialogue.input.PromptInputType;
 import com.nthbyte.dialogue.input.context.RegexInputContext;
 import com.nthbyte.dialogue.util.Utils;
-import org.apache.commons.lang.CharUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -97,6 +96,7 @@ public class DialogueCommand implements CommandExecutor {
                     .addReceiveInputAction(Action.STORE_INPUT, new ActionContext<>("z"))
                     .addReceiveInputAction(Action.MESSAGE, new ActionContext<>("&eYou will teleport to the Z coordinate of &f%z%"))
             )
+            .setTimeLimit(5)
             .addEndAction(Action.TELEPORT, new LocationContext())
             .addEndAction(Action.MESSAGE, new ActionContext<>("&aYou have been teleported!"))
             .setEscapeSequences("exit")

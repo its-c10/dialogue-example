@@ -6,7 +6,7 @@
 
     <groupId>net.calebowens</groupId>
     <artifactId>dialogue-example</artifactId>
-    <version>1.7.0</version>
+    <version>1.9.0</version>
     <packaging>jar</packaging>
 
     <name>Dialogue Example</name>
@@ -26,7 +26,7 @@
                 <version>2.3.1</version>
                 <configuration>
                     <!-- Change this to decide where the jar gets built -->
-                    <outputDirectory>C:\Minecraft Servers\1.8.8\plugins</outputDirectory>
+                    <outputDirectory>C:\Users\caleb\OneDrive\Desktop\Minecraft Servers\1.8.8\plugins</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
